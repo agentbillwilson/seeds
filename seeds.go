@@ -30,10 +30,10 @@ func NextTick(t time.Time, d time.Duration) time.Time {
 
 const usage = `usage of seeds: [-start time] [duration] [count]
 
-seedss calculates when a Farming seed in Old School RuneScape with the given
+seeds calculates when a Farming seed in Old School RuneScape with the given
 tick duration and number of ticks will be grown to completion. If the -start
-flag is specified, a planting time can be specified; otherwise, seeds will use
-the current time for planting.`
+flag is specified, a planting time can be specified (RFC3339); otherwise, seeds 
+will use the current time for planting.`
 
 func main() {
 	startp := flag.String("start", "", "the time when the seed was planted (RFC3339)")
@@ -43,6 +43,7 @@ func main() {
 	flag.Parse()
 	args := flag.Args()
 	if len(args) != 2 {
+		fmt.Println(len(args))
 		flag.Usage()
 		os.Exit(1)
 	}
