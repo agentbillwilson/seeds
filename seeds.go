@@ -46,9 +46,8 @@ func main() {
 		os.Exit(1)
 	}
 	start := time.Now()
-	loc := start.Location()
 	if *startp != "" {
-		t, err := time.ParseInLocation(layout, *startp, loc)
+		t, err := time.Parse(layout, *startp)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -63,6 +62,6 @@ func main() {
 		log.Fatal(err)
 	}
 	growd := d * time.Duration(n)
-	t := NextTick(start, d).Add(growd).In(loc)
+	t := NextTick(start, d).Add(growd).In(start.Location())
 	fmt.Println(t.Format(layout))
 }
