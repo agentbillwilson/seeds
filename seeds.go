@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// NextTick returns the tick of duration d that will begin soonest after time t.
 func NextTick(t time.Time, d time.Duration) time.Time {
 	start := time.Date(
 		t.Year(), t.Month(), t.Day(),
@@ -62,6 +63,6 @@ func main() {
 		log.Fatal(err)
 	}
 	growd := d * time.Duration(n)
-	t := NextTick(start, d).Add(growd)
-	fmt.Println(t.In(loc).Format(layout))
+	t := NextTick(start, d).Add(growd).In(loc)
+	fmt.Println(t.Format(layout))
 }
