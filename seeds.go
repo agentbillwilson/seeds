@@ -25,14 +25,14 @@ func NextTick(t time.Time, d time.Duration) time.Time {
 	return tomorrow
 }
 
+const layout = "Jan _2 15:04 MST 2006"
+
 const usage = `usage: seeds [-start time] [duration] [count]
 
 seeds calculates when a Farming seed in Old School RuneScape with the given
 tick duration (e.g. 160m) and number of ticks will be grown to completion.
-Planting time can be specified with the -start flag (e.g. Jan 2 15:04 2006);
+Planting time can be specified with the -start flag (e.g. Jan 2 15:04 MST 2006);
 otherwise, seeds will use the current time for planting.`
-
-const layout = "Jan _2 15:04 2006"
 
 func main() {
 	startp := flag.String("start", "", "the time when the seed was planted")
