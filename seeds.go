@@ -10,7 +10,6 @@ import (
 )
 
 func NextTick(t time.Time, d time.Duration) time.Time {
-	var ticks []time.Time
 	start := time.Date(
 		t.Year(), t.Month(), t.Day(),
 		0, 0, 0, 0,
@@ -18,9 +17,6 @@ func NextTick(t time.Time, d time.Duration) time.Time {
 	)
 	tomorrow := start.Add(24 * time.Hour)
 	for tt := start; tt.Before(tomorrow); tt = tt.Add(d) {
-		ticks = append(ticks, tt)
-	}
-	for _, tt := range ticks {
 		if tt.After(t) {
 			return tt
 		}
@@ -31,14 +27,14 @@ func NextTick(t time.Time, d time.Duration) time.Time {
 const usage = `usage: seeds [-start time] [duration] [count]
 
 seeds calculates when a Farming seed in Old School RuneScape with the given
-tick duration and number of ticks will be grown to completion. If the -start
-flag is specified, a planting time can be specified in the form e.g.
-Jan 2 15:04 2006; otherwise, seeds will use the current time for planting.`
+tick duration (e.g. 160m) and number of ticks will be grown to completion.
+Planting time can be specified with the -start flag (e.g. Jan 2 15:04 2006);
+otherwise, seeds will use the current time for planting.`
 
 const layout = "Jan _2 15:04 2006"
 
 func main() {
-	startp := flag.String("start", "", "the time when the seed was planted (RFC3339)")
+	startp := flag.String("start", "", "the time when the seed was planted")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, usage)
 	}
