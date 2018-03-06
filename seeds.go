@@ -64,6 +64,6 @@ func main() {
 	}
 	growd := d * time.Duration(n)
 	loc := start.Location()
-	t := NextTick(start, d).Add(growd).In(loc)
-	fmt.Println(t.Format(layout))
+	complete := NextTick(start, d).Add(growd).In(loc).Format(layout)
+	fmt.Println(complete)
 }
