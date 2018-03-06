@@ -19,7 +19,6 @@ func NextTick(t time.Time, d time.Duration) time.Time {
 	)
 	tomorrow := start.Add(24 * time.Hour)
 	for tt := start; tt.Before(tomorrow); tt = tt.Add(d) {
-		fmt.Println(tt)
 		if tt.After(t) {
 			return tt
 		}
